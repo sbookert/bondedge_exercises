@@ -18,16 +18,39 @@ USE `bondedge`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `Citizen`
+-- Table structure for table `Citizen`
 --
 
-INSERT INTO `Citizen` VALUES (1,'Jack','Rabbit','c','d','e','f'),(2,'Bobby','Johnson','c','d','e','f'),(3,'Samantha','Nicols','d','3','4','f'),(4,'Mickey','Mouse','a','b','c','d'),(5,'Daffy','Duck','s','s','s','s'),(6,'Tazzie','Tazmanian','s','d','w','g'),(7,'Twittie','Bird','a','s','s','s'),(8,'Billy','Bob','s','s','s','s'),(9,'Papa','John','d','d','d','d'),(10,'Jackie','Chan','s','e','e','r'),(11,'Oliver','Twist','w','e','r','t');
+DROP TABLE IF EXISTS `Citizen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Citizen` (
+  `CitizenId` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(256) DEFAULT NULL,
+  `LastName` varchar(256) DEFAULT NULL,
+  `Street` varchar(256) DEFAULT NULL COMMENT 'Example: 1221 W Adams St.',
+  `City` varchar(256) DEFAULT NULL,
+  `State` varchar(2) DEFAULT NULL,
+  `Zipcode` varchar(10) DEFAULT NULL COMMENT 'We are supporting the following formats: 12345 and 12345-6789',
+  PRIMARY KEY (`CitizenId`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PresidentialCandidate`
+-- Table structure for table `PresidentialCandidate`
 --
 
-INSERT INTO `PresidentialCandidate` VALUES (0,1),(1,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
+DROP TABLE IF EXISTS `PresidentialCandidate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `PresidentialCandidate` (
+  `PresidentialCandidateId` smallint(5) unsigned NOT NULL,
+  `CitizenId` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`PresidentialCandidateId`),
+  UNIQUE KEY `idx_CitizenId_UNIQUE` (`CitizenId`),
+  CONSTRAINT `fk_PresidentialCandidate_CitizenId` FOREIGN KEY (`CitizenId`) REFERENCES `Citizen` (`CitizenId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -68,10 +91,22 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Dumping data for table `Vote`
+-- Table structure for table `Vote`
 --
 
-INSERT INTO `Vote` VALUES (1,1,'2019-05-18 06:32:27','Etc/GMT+0');
+DROP TABLE IF EXISTS `Vote`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Vote` (
+  `CitizenId` int(10) unsigned NOT NULL,
+  `PresidentialCandidateId` smallint(5) NOT NULL,
+  `DateTimeOfVoteUTC` datetime NOT NULL COMMENT 'This field will be set by the database.',
+  `LocalTimeZone` varchar(40) NOT NULL COMMENT 'Sample format: GMT, PST',
+  PRIMARY KEY (`CitizenId`),
+  KEY `idx_PresidentialCandidate` (`PresidentialCandidateId`),
+  CONSTRAINT `fk_Vote_Citizen` FOREIGN KEY (`CitizenId`) REFERENCES `Citizen` (`CitizenId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -174,3 +209,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- Dump completed on 2019-05-18  0:36:14
