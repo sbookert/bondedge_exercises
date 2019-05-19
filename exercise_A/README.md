@@ -37,7 +37,17 @@ See the SQL file: [BondedgeDDL.sql](https://github.com/sbookert/bondedge_exercis
 Further discussion is needed to created less ambiguous requirements than "easily queryable". Said differently we need to know answers to several questions. Are we talking about speed? If so we need to know what the acceptable time is for the database to provide a response. Are we talking about easy in terms of less complexity? If so we need to assess how many resources are available for developing a robust application layer. For example, if the business layer can increment column `NumberOfVotes` then we can have an extremely fast query which only looks at 10 rows or less in table `PresidentialCandidate`.
 
 If we go with the _robust application layer approach_ the query would be:
-```select * from ```
+```sql
+SELECT
+	c.FirstName,
+	c.LastName
+FROM
+	PresidentialCandidate pc
+LEFT JOIN Citizen c ON
+	pc.CitizenId = c.CitizenId
+ORDER BY
+	pc.NumberOfVotes DESC
+LIMIT 1 offset 0; ```
 
 If we go with the _we can wait for a minute or less approach_ the query would be:
 ```select * from ```
