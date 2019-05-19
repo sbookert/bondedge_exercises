@@ -22,6 +22,11 @@ Votes that reach the database before 6am and after 8pm are prevented from being 
 - Triggers can be seen here: [TRIGGERS](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L77)
 - Stored procedure is here: [PROCEDURE](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L108)
 
-### "your DB design should be easily queryable to determine the result."
+#### "your DB design should be easily queryable to determine the result."
 An application layer should be created with an API which executes the query. Creating such a layer is out of scope of this exercise.
 
+## Problems
+1.            Draw the Entity-Relation diagram for your design that satisfies the requirements above. You can use whatever drawing tool you want, but please submit your diagram in PDF format.
+2.            Write the DDL for the tables in your design
+3.            Write the query to determine who will be the next President of the USB.
+4.            It turns out that the laws of USB are such that the person with the second most votes will be the Vice President. Write the query to determine who will be the next Vice President of USB
