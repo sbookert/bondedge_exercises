@@ -18,7 +18,7 @@ Every citizen eligible to vote is in table Citizen and has a CitizenId. Each Cit
 - See the Primary Key defined, which are by default unique, here: [Unique](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L70)
 
 ### "ignore votes cast before 6am on Election Day, and after 8pm of the same day when the polls close."
-Votes that reach the database before 6am and after 8pm are prevented from being inserted in the Vote table using a check condition.
+Votes that reach the database before 6am and after 8pm are prevented from being inserted in the Vote table using a check condition. We are assuming that voters in different time zones may submit their votes using their local times.
 - Triggers can be seen here: [TRIGGERS](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L77)
 - Stored procedure is here: [PROCEDURE](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L108)
 
