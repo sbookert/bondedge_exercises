@@ -15,7 +15,7 @@ Additional conversations would have to take place with the UI team to identify w
 
 ### "A citizen who votes can only vote once"
 Every citizen eligible to vote is in table Citizen and has a CitizenId. Each CitizenId can exist only once in the Vote table.
-- See the Unique Constraint defined here: [Unique](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L70)
+- See the Primary Key defined, which are by default unique, here: [Unique](https://github.com/sbookert/bondedge_exercises/blob/91400691e490a7a31e1c85e1ca2a5ba566c14e66/exercise_A/BondedgeDDL.sql#L70)
 
 ### "ignore votes cast before 6am on Election Day, and after 8pm of the same day when the polls close."
 Votes that reach the database before 6am and after 8pm are prevented from being inserted in the Vote table using a check condition.
