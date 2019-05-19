@@ -47,10 +47,67 @@ LEFT JOIN Citizen c ON
 	pc.CitizenId = c.CitizenId
 ORDER BY
 	pc.NumberOfVotes DESC
-LIMIT 1 offset 0; ```
+LIMIT 1 offset 0; 
+```
 
 If we go with the _we can wait for a minute or less approach_ the query would be:
-```select * from ```
+```sql
+SELECT
+	c.FirstName,
+	c.LastName
+FROM
+	(
+	SELECT
+		PresidentialCandidateId,
+		COUNT(PresidentialCandidateId) AS COUNT
+	FROM
+		`bondedge`.`Vote`
+	GROUP BY
+		PresidentialCandidateId
+	ORDER BY
+		COUNT DESC
+	LIMIT 1 offset 0 ) tmp
+LEFT JOIN PresidentialCandidate pc ON
+	tmp.PresidentialCandidateId = pc.PresidentialCandidateId
+LEFT JOIN Citizen c ON
+	pc.CitizenId = c.CitizenId ;
+```
 
 #### 4. It turns out that the laws of USB are such that the person with the second most votes will be the Vice President. Write the query to determine who will be the next Vice President of USB
 
+If we go with the _robust application layer approach_ the query would be:
+```sql
+SELECT
+	c.FirstName,
+	c.LastName
+FROM
+	PresidentialCandidate pc
+LEFT JOIN Citizen c ON
+	pc.CitizenId = c.CitizenId
+ORDER BY
+	pc.NumberOfVotes DESC
+LIMIT 1 offset 1; 
+```
+
+If we go with the _we can wait for a minute or less approach_ the query would be:
+```sql
+SELECT
+	c.FirstName,
+	c.LastName
+FROM
+	(
+	SELECT
+		PresidentialCandidateId,
+		COUNT(PresidentialCandidateId) AS COUNT
+	FROM
+		`bondedge`.`Vote`
+	GROUP BY
+		PresidentialCandidateId
+	ORDER BY
+		COUNT DESC
+	LIMIT 1 offset 1 ) tmp
+LEFT JOIN PresidentialCandidate pc ON
+	tmp.PresidentialCandidateId = pc.PresidentialCandidateId
+LEFT JOIN Citizen c ON
+	pc.CitizenId = c.CitizenId ;
+```
