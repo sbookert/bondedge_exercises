@@ -34,7 +34,13 @@ See the PDF file: [BondEdgeExA.pdf](https://github.com/sbookert/bondedge_exercis
 See the SQL file: [BondedgeDDL.sql](https://github.com/sbookert/bondedge_exercises/blob/master/exercise_A/BondedgeDDL.sql)
 
 #### 3. Write the query to determine who will be the next President of the USB.
-Further discussion is needed to created less ambiguous requirements than "easily queryable". Said differently we need to know answers to several questions. Are we talking about speed? If so we need to know what the acceptable time is for the database to provide a response. Are we talking about easy in terms of less complexity? If so we need to assess how many resources are available for developing a robust application layer. For example if the business layer can increment the `NumberOfVotes` then we can have an extremely fast query which only looks at 10 rows or less in the `PresidentialCandidate` table.
+Further discussion is needed to created less ambiguous requirements than "easily queryable". Said differently we need to know answers to several questions. Are we talking about speed? If so we need to know what the acceptable time is for the database to provide a response. Are we talking about easy in terms of less complexity? If so we need to assess how many resources are available for developing a robust application layer. For example, if the business layer can increment column `NumberOfVotes` then we can have an extremely fast query which only looks at 10 rows or less in table `PresidentialCandidate`.
+
+If we go with the _robust application layer approach_ the query would be:
+```select * from ```
+
+If we go with the _we can wait for a minute or less approach_ the query would be:
+```select * from ```
 
 #### 4. It turns out that the laws of USB are such that the person with the second most votes will be the Vice President. Write the query to determine who will be the next Vice President of USB
 
