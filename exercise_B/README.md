@@ -17,8 +17,9 @@ No testing has been done on Windows.
 #### "Do not assume the entire file can fit in memory"
 
 To address this a reactive solution was developed using Spring's Reactor Library. Lines are read one
-by one and buffered to capture all prices for one CUSIP, and then the next batch of CUSIP and prices is
-loaded.
+by one and pushed by a [reactive stream publisher](https://github.com/sbookert/bondedge_exercises/blob/a448044545f45d512baf6569c08a7ed5b5bb2367/exercise_B/src/main/java/com/bondedge/exercise/b/bond/tickers/TickerFilePublisher.java#L23).
+This stream is then [buffered to capture all prices for one CUSIP by the subscriber](https://github.com/sbookert/bondedge_exercises/blob/a448044545f45d512baf6569c08a7ed5b5bb2367/exercise_B/src/main/java/com/bondedge/exercise/b/bond/tickers/TickerErrorHandlingSubscriber.java#L21),
+and then the next batch of CUSIP and prices is loaded.
 
 #### "Java program that will print the closing (or latest) price for each CUSIP"
 
@@ -48,7 +49,8 @@ $ ./gradlew bootRun -Pfile=./data/tickers.txt
 
 The application is configured to use Spring Boot's in memory integration test libraries. It also
 makes use of Spring's dependency injection to inject a publisher that pulls data from code for
-testing as opposed to the file given in the command line file parameter.
+testing as opposed to the publisher that pulls data from the file given in the command line
+program argument.
 
 ```
 (vpopescu@zpopescu.local) ~/_vlad/dev-almeu/repo/bondedge_exercises/exercise_B
