@@ -48,8 +48,9 @@ $ ./gradlew bootRun -Pfile=./data/tickers.txt
 #### Tests
 
 The application is configured to use Spring Boot's in memory integration test libraries. It also
-makes use of Spring's dependency injection to inject a publisher that pulls data from code for
-testing as opposed to the publisher that pulls data from the file given in the command line
+makes use of Spring's dependency injection to [inject a publisher](https://github.com/sbookert/bondedge_exercises/blob/d490b020ef70ba38a3ecc74b89c20d32736a1213/exercise_B/src/test/java/com/bondedge/exercise/b/bond/tickers/test/utils/ConfigOverridesForTest.java#L14)
+which pulls data from code for
+testing as opposed to the publisher which pulls data from the file given in the command line
 program argument.
 
 ```
